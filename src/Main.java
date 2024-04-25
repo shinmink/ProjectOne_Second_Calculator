@@ -2,14 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
         // 1.  Scanner 를 사용하여 양의 정수
         // 2개(0 포함)를 전달 받을 수 있습니다.
         // 양의 정수는 각각 하나씩 전달 받습니다.
         // 양의 정수는 적합한 타입으로 선언한 변수에 저장합니다.
 
-        Scanner sc = new Scanner(System.in);
         int result = 0;
         String order = "";
+        int[] intArray = new int[10]; // 초기값 {0,0,0 ... }
+        int index = 0; // 배열 인덱스를 나타내는 변수
 
         do {
 
@@ -62,14 +66,36 @@ public class Main {
                 }
             }
 
+            System.out.println("결과: " + result);
+
             // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
             // 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다
             // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
+            // 연산 결과가 10개를 초과하는 경우
+            // 배열에 결과 값을 추가하고, 10개를 초과하는 경우 가장 처음에 들어온 결과 값을 제거합니다.
+            if (index >= intArray.length) {
+                for (int i = 0; i < intArray.length - 1; i++) {
+                    intArray[i] = intArray[i + 1];
+                }
+                intArray[intArray.length - 1] = result; // 새로운 결과 값을 맨 뒤에 추가합니다.
+            } else {
+                intArray[index] = result; // 현재 인덱스에 결과 값을 추가합니다.
+                index++;
+            }
+            //6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
+            // - 현재 저장된 index가 마지막(9)라면 가장 먼저 저장된 결과 값이 삭제 되고 새로운 결과 값이 마지막 index에 저장될 수 있도록 구현합니다.
+            // - Hint : 결과 값들이 한칸씩 앞으로 이동되면 되지 않을까?
+
+
+            // 배열에 저장된 연산 결과를 출력합니다.
+            for (int number : intArray) {
+                System.out.print(number + " ");
+            }
 
 
 
 
-            System.out.println("결과: " + result);
+
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
             order = sc.nextLine();
 
