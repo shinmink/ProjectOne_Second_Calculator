@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,8 +14,15 @@ public class Main {
 
         int result = 0;
         String order = "";
-        int[] intArray = new int[10]; // 초기값 {0,0,0 ... }
+        // int[] intArray = new int[10]; // 초기값 {0,0,0 ... }
         int index = 0; // 배열 인덱스를 나타내는 변수
+        // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
+        // - JCF(Java Collection Framework)를 사용합니다. (e.g. List, Set …)
+
+        List<Integer> resultList = new ArrayList<>();
+
+
+
 
         do {
 
@@ -73,27 +82,45 @@ public class Main {
             // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
             // 연산 결과가 10개를 초과하는 경우
             // 배열에 결과 값을 추가하고, 10개를 초과하는 경우 가장 처음에 들어온 결과 값을 제거합니다.
-            if (index >= intArray.length) {
-                for (int i = 0; i < intArray.length - 1; i++) {
-                    intArray[i] = intArray[i + 1];
-                }
-                intArray[intArray.length - 1] = result; // 새로운 결과 값을 맨 뒤에 추가합니다.
-            } else {
-                intArray[index] = result; // 현재 인덱스에 결과 값을 추가합니다.
-                index++;
-            }
+//            if (index >= intArray.length) {
+//                for (int i = 0; i < intArray.length - 1; i++) {
+//                    intArray[i] = intArray[i + 1];
+//                }
+//                intArray[intArray.length - 1] = result; // 새로운 결과 값을 맨 뒤에 추가합니다.
+//            } else {
+//                intArray[index] = result; // 현재 인덱스에 결과 값을 추가합니다.
+//                index++;
+//            }
             //6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
             // - 현재 저장된 index가 마지막(9)라면 가장 먼저 저장된 결과 값이 삭제 되고 새로운 결과 값이 마지막 index에 저장될 수 있도록 구현합니다.
             // - Hint : 결과 값들이 한칸씩 앞으로 이동되면 되지 않을까?
+            //7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
+            // - JCF(Java Collection Framework)를 사용합니다. (e.g. List, Set …)
+            // - “remove”라는 문자열을 입력받으면 가장 먼저 저장된 결과가 삭제될 수 있도록 구현합니다.
 
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+            order = sc.nextLine();
+            if (order.equals("remove")) {
+                // 첫 번째 결과를 삭제합니다.
+                resultList.remove(0);
+                // 새로운 결과 값을 맨 뒤에 추가합니다.
+                resultList.add(result);
+            } else {
+                // 결과 값을 추가합니다.
+                resultList.add(result);
+                }
 
-            // 배열에 저장된 연산 결과를 출력합니다.
-            for (int number : intArray) {
-                System.out.print(number + " ");
+            // 8. “inquiry”라는 문자열이 입력되면 저장된 연산 결과 전부를 출력합니다.
+            // - foreach(향상된 for문)을 활용하여 구현 해봅니다.
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            order = sc.nextLine();
+            if (order.equals("inquiry")) {
+                // 배열에 저장된 연산 결과를 출력합니다.
+                for (int number : resultList) {
+                    System.out.print(number + " ");
+                }
             }
-
-
-
 
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
