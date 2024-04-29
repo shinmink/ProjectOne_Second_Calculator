@@ -55,63 +55,14 @@ public class Calculator {
     }
 
 
+
     public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
-
-        //1. 양의 정수 2개(0 포함)와 연산 기호를 매개변수로 받아
-        int answer = 0;
-
-        //3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
-
-        /* 제어문을 활용하여 위 요구사항을 만족할 수 있게 구현합니다.*/
-        if (Number1 <= 0 && Number2 <= 0) {
-            throw new CalculatorException("두 정수가 모두 0 이상이어야 합니다.");
-        } else {
-            switch (operator) {
-                case '+':
-                    answer = Number1 + Number2;
-                    break;
-                case '-':
-                    answer = Number1 - Number2;
-                    break;
-                case '*':
-                    answer = Number1 * Number2;
-                    break;
-                case '/':
-                    if (Number2 == 0) {
-                        throw new CalculatorException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                        //continue;
-                    }
-                    answer = Number1 / Number2;
-                    break;
-                case '%':
-                    answer = Number1 % Number2;
-                    break;
-                default:
-                    throw new CalculatorException("올바르지 않은 연산자입니다.");
-                    //continue;
-            }
-        }
-        setTotal(answer);
-        System.out.println("결과: " + getTotal());
-
-        // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
-
-        //6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
-
-        //7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
-
-        return total;
-
+        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 calculate 메서드를 사용하세요.");
     }
 
     /* 원의 넓이를 구하는 메서드 선언*/
     public double calculateCircleArea(int r) throws CalculatorException {
-        /* 원의 넓이 계산 구현 */
-        double answer = r * r * PI;
-        AreaTotal = answer;
-        //AreaResultList.add(AreaTotal);
-
-        return answer;
+        throw new UnsupportedOperationException("CircleCalculator의 calculateCircleArea 메서드를 사용하세요.");
     }
 
     // removeResult 메서드 구현
@@ -120,6 +71,7 @@ public class Calculator {
            // resultList.remove(0);
         //}
         // 첫 번째 결과 삭제 오버라이딩으로 하단에서 구현
+        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 removeResult 메서드를 사용하세요.");
     }
 
     // inquiryResults 메서드 구현
@@ -132,6 +84,7 @@ public class Calculator {
 
         // 배열에 저장된 연산 결과를 출력합니다.
         // 오버라이딩으로 하단에서 구현
+        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 inquiryResults 메서드를 사용하세요.");
     }
 
     public static class ArithmeticCalculator extends Calculator {
@@ -139,6 +92,41 @@ public class Calculator {
         public ArithmeticCalculator(){
 
         }
+
+        @Override
+        public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
+            int answer = 0;
+            if (Number1 <= 0 && Number2 <= 0) {
+                throw new CalculatorException("두 정수가 모두 0 이상이어야 합니다.");
+            } else {
+                switch (operator) {
+                    case '+':
+                        answer = Number1 + Number2;
+                        break;
+                    case '-':
+                        answer = Number1 - Number2;
+                        break;
+                    case '*':
+                        answer = Number1 * Number2;
+                        break;
+                    case '/':
+                        if (Number2 == 0) {
+                            throw new CalculatorException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
+                        }
+                        answer = Number1 / Number2;
+                        break;
+                    case '%':
+                        answer = Number1 % Number2;
+                        break;
+                    default:
+                        throw new CalculatorException("올바르지 않은 연산자입니다.");
+                }
+            }
+            //getResultList().add(answer);
+
+            return answer;
+        }
+
         // 사칙 연산의 removeResult 메서드 오버라이딩
         @Override
         public void removeResult() {
@@ -162,6 +150,16 @@ public class Calculator {
     public static class CircleCalculator extends Calculator {
         public CircleCalculator(){
 
+        }
+
+        @Override
+        public double calculateCircleArea(int r) throws CalculatorException {
+            if (r <= 0) {
+                throw new CalculatorException("반지름은 0보다 커야 합니다.");
+            }
+            double area = r * r * PI;
+            //getAreaResultList().add(area);
+            return area;
         }
         // 원의 넓이 구하기 inquiryResults 메서드 오버라이딩
         @Override

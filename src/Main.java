@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator();
 
         Calculator.ArithmeticCalculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
         Calculator.CircleCalculator circleCalculator= new Calculator.CircleCalculator();
@@ -32,10 +31,10 @@ public class Main {
                     /* 원의 넓이를 구하는 경우 반지름을 입력받아 원의 넓이를 구한 후 출력*/
                     System.out.print("반지름 입력: ");
                     int radius = Integer.parseInt(sc.nextLine());
-                    double areaResult = calculator.calculateCircleArea(radius);
+                    double areaResult = circleCalculator.calculateCircleArea(radius);
                     System.out.println("원의 넓이: " + areaResult);
                     /* 원의 넓이 저장 */
-                    calculator.getAreaResultList().add(areaResult);
+                    circleCalculator.getAreaResultList().add(areaResult);
                     /* 원의 넓이 리스트 출력 */
                     circleCalculator.inquiryResults();
 
@@ -56,7 +55,7 @@ public class Main {
 
                     // 3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
 
-                    result = calculator.calculate(Number1, Number2, operator);
+                    result = arithmeticCalculator.calculate(Number1, Number2, operator);
                     //System.out.println("결과: " + result);
 
 
@@ -74,7 +73,7 @@ public class Main {
                         arithmeticCalculator.removeResult(); // 첫 번째 결과 삭제
                     }
 
-                    calculator.getResultList().add(result);
+                    arithmeticCalculator.getResultList().add(result);
 
                     // 8. “inquiry”라는 문자열이 입력되면 저장된 연산 결과 전부를 출력합니다.
                     // - foreach(향상된 for문)을 활용하여 구현 해봅니다.
