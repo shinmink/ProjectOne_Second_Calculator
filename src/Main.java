@@ -79,6 +79,12 @@ public class Main {
                     if (order.equals("inquiry")) {
                         arithmeticCalculator.inquiryResults();
                     }
+
+                    System.out.println("입력 값보다 큰 연산결과를 조회하시겠습니까? (biggerinquiry 입력 시 조회)");
+                    order = sc.nextLine();
+                    if (order.equals("biggerinquiry")) {
+                        arithmeticCalculator.inquirybiggerResults(Number1, Number2);
+                    }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("올바른 숫자를 입력하세요.");

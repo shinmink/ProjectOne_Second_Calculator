@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class Calculator {
+public abstract class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
@@ -71,6 +71,11 @@ public class Calculator {
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 removeResult 메서드를 사용하세요.");
     }
 
+    // 사칙 연산의 inquiryResults 메서드 오버라이딩
+    public abstract void inquirybiggerResults(int num1, int num2);
+
+    // 사칙 연산의 inquiryResults 메서드 오버라이딩
+
     // inquiryResults 메서드 구현
     public void inquiryResults() {
         // 배열에 저장된 연산 결과를 출력합니다.
@@ -122,6 +127,17 @@ public class Calculator {
             }
         }
 
+
+        @Override
+        public void inquirybiggerResults(int num1, int num2) {
+            // 배열에 저장된 연산 결과를 출력합니다.
+            resultList.stream()
+                    .filter(number -> number > num1 && number > num2)
+                    .forEach(number -> System.out.print(number + " "));
+            System.out.println();
+
+        }
+
         // 사칙 연산의 inquiryResults 메서드 오버라이딩
         @Override
         public void inquiryResults() {
@@ -149,6 +165,10 @@ public class Calculator {
             return area;
         }
 
+        @Override
+        public void inquirybiggerResults(int num1, int num2) {
+
+        }
         // 원의 넓이 구하기 inquiryResults 메서드 오버라이딩
         @Override
         public void inquiryResults() {
