@@ -7,7 +7,6 @@ public class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
-
     private List<Integer> resultList = new ArrayList<>();
 
     public List<Integer> getResultList() {
@@ -15,6 +14,7 @@ public class Calculator {
     }
 
     public Calculator() {
+        resultList = new ArrayList<>(); // 생성자에서 컬렉션 필드 초기화
     }
 
     ; // 기본 생성자
