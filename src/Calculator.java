@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
@@ -91,6 +90,7 @@ public class Calculator {
     SubtractOperator subtractOperator = new SubtractOperator();
     MultiplyOperator multiplyOperator = new MultiplyOperator();
     DivideOperator divideOperator = new DivideOperator();
+    ModOperator modOperator = new ModOperator();
 
     public static class ArithmeticCalculator extends Calculator {
 
@@ -120,7 +120,7 @@ public class Calculator {
                         answer = divideOperator.operate(Number1, Number2);
                         break;
                     case '%':
-                        answer = Number1 % Number2;
+                        answer = modOperator.operate(Number1, Number2);
                         break;
                     default:
                         throw new CalculatorException("올바르지 않은 연산자입니다.");
