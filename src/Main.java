@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Calculator calculator = new Calculator();
 
         // 1.  Scanner 를 사용하여 양의 정수
         // 2개(0 포함)를 전달 받을 수 있습니다.
@@ -14,6 +15,7 @@ public class Main {
 
         int result = 0;
         String order = "";
+
         // int[] intArray = new int[10]; // 초기값 {0,0,0 ... }
         int index = 0; // 배열 인덱스를 나타내는 변수
         // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
@@ -25,6 +27,7 @@ public class Main {
 
 
         do {
+            try{
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
             // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
@@ -43,41 +46,11 @@ public class Main {
 //        - 입력받은 연산 기호를 구분하기 위해 제어문을 사용합니다. (e.g.if, switch)
 //        - 연산 오류가 발생할 경우 해당 오류에 대한 내용을 정제하여 출력합니다.
 //        - e.g. “나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다. “
-
-
-            /* 제어문을 활용하여 위 요구사항을 만족할 수 있게 구현합니다.*/
-            if (Number1 <= 0 && Number2 <= 0) {
-                System.out.println("두 정수가 모두 0 이상이어야 합니다.");
-            } else {
-                switch (operator) {
-                    case '+':
-                        result = Number1 + Number2;
-                        break;
-                    case '-':
-                        result = Number1 - Number2;
-                        break;
-                    case '*':
-                        result = Number1 * Number2;
-                        break;
-                    case '/':
-                        if (Number2 == 0) {
-                            System.out.println("0으로 나눌 수 없습니다.");
-                            continue;
-                        }
-                        result = Number1 / Number2;
-                        break;
-                    case '%':
-                        result = Number1 % Number2;
-                        break;
-                    default:
-                        System.out.println("올바르지 않은 연산자입니다.");
-                        continue;
-                }
-            }
-
+            result = calculator.calculate(Number1, Number2, operator);
             System.out.println("결과: " + result);
 
-            // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
+
+                // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
             // 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다
             // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
             // 연산 결과가 10개를 초과하는 경우
@@ -120,8 +93,13 @@ public class Main {
                 for (int number : resultList) {
                     System.out.print(number + " ");
                 }
+                System.out.println();
             }
-
+            } catch (NumberFormatException e) {
+                System.out.println("올바른 숫자를 입력하세요.");
+            } catch (Calculator.CalculatorException e) {
+                System.out.println("오류: " + e.getMessage());
+            }
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
             order = sc.nextLine();
