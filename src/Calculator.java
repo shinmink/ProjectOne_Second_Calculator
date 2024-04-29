@@ -7,17 +7,30 @@ public class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
-    private List<Integer> resultList = new ArrayList<>();
+    private List<Integer> resultList;
+
+    // 원의 넓이를 구하는 필드와 메서드 선언과 구현 ----------------------------
+
+    /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
+    /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
+
+    /* 원주율은 pi 이기에 상수로 생성*/
+    private static double AreaTotal = 0;
+    private List<Double> AreaResultList;
+
+    private static final double PI = 3.141592;
+
+
+    public Calculator() {
+        resultList = new ArrayList<>(); // 생성자에서 컬렉션 필드 초기화
+        AreaResultList = new ArrayList<>();
+    }// 기본 생성자
+
 
     public List<Integer> getResultList() {
         return resultList;
     }
 
-    public Calculator() {
-        resultList = new ArrayList<>(); // 생성자에서 컬렉션 필드 초기화
-    }
-
-    ; // 기본 생성자
 
     public int getTotal() {
         return total;
@@ -27,12 +40,21 @@ public class Calculator {
         this.total = total;
     }
 
-
-    class CalculatorException extends Exception {
-        public CalculatorException(String message) {
-            super(message);
-        }
+    public List<Double> getAreaResultList() {
+        return AreaResultList;
     }
+
+    /* 원의 넓이 저장 필드 Getter, Setter, 조회 메서드 구현 */
+    public double getAreaTotal() {
+        return AreaTotal;
+    }
+
+    public void setAreaTotal(double AreaTotal) {
+        this.AreaTotal = AreaTotal;
+    }
+
+
+
 
     public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
 
@@ -127,5 +149,26 @@ public class Calculator {
         System.out.println();
     }
 
+    /* 원의 넓이를 구하는 메서드 선언*/
+    public double calculateCircleArea(int r) throws CalculatorException {
+        /* 원의 넓이 계산 구현 */
+        double answer = r * r * PI;
+        AreaTotal = answer;
+        //AreaResultList.add(AreaTotal);
+
+        for (double number : AreaResultList) {
+            System.out.print(number + " ");
+        }
+
+        System.out.println();
+        return answer;
+    }
+
+    class CalculatorException extends Exception {
+        public CalculatorException(String message) {
+            super(message);
+        }
+    }
 
 }
+
