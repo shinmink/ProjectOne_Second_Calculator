@@ -86,11 +86,7 @@ public class Main {
                 System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
                 order = sc.nextLine();
                 if (order.equals("inquiry")) {
-                    // 배열에 저장된 연산 결과를 출력합니다.
-                    for (int number : resultList) {
-                        System.out.print(number + " ");
-                    }
-                    System.out.println();
+                    calculator.inquiryResults();
                 }
             } catch (NumberFormatException e) {
                 System.out.println("올바른 숫자를 입력하세요.");

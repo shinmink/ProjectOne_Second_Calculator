@@ -119,5 +119,13 @@ public class Calculator {
         }
     }
 
+    public void inquiryResults() {
+        // 배열에 저장된 연산 결과를 출력합니다.
+        for (int number : resultList) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+    }
+
 
 }
