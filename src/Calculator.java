@@ -87,10 +87,14 @@ public class Calculator {
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 inquiryResults 메서드를 사용하세요.");
     }
 
+    AddOperator addOperator = new AddOperator();
+    SubtractOperator subtractOperator = new SubtractOperator();
+    MultiplyOperator multiplyOperator = new MultiplyOperator();
+    DivideOperator divideOperator = new DivideOperator();
+
     public static class ArithmeticCalculator extends Calculator {
 
         public ArithmeticCalculator(){
-
         }
 
         @Override
@@ -101,19 +105,19 @@ public class Calculator {
             } else {
                 switch (operator) {
                     case '+':
-                        answer = Number1 + Number2;
+                        answer = addOperator.operate(Number1, Number2);
                         break;
                     case '-':
-                        answer = Number1 - Number2;
+                        answer = subtractOperator.operate(Number1, Number2);
                         break;
                     case '*':
-                        answer = Number1 * Number2;
+                        answer = multiplyOperator.operate(Number1, Number2);
                         break;
                     case '/':
                         if (Number2 == 0) {
                             throw new CalculatorException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                         }
-                        answer = Number1 / Number2;
+                        answer = divideOperator.operate(Number1, Number2);
                         break;
                     case '%':
                         answer = Number1 % Number2;
