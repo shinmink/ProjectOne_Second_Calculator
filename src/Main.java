@@ -65,6 +65,7 @@ public class Main {
 
                     // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
 
+                    System.out.println(result);
 
                     System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
                     order = sc.nextLine();
