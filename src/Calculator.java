@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
-    private static List<Integer> resultList;
+    private static List<Double> resultList;
 
     // 원의 넓이를 구하는 필드와 메서드 선언과 구현 ----------------------------
 
@@ -16,6 +17,27 @@ public class Calculator {
     /* 원주율은 pi 이기에 상수로 생성*/
     private static final double PI = 3.141592;
 
+
+    public enum Operator {
+        PLUS("+", (a, b) -> (a + b)),
+        MINUS("-", (a, b) -> (a - b)),
+        MULTIPLY("*", (a, b) -> (a * b)),
+        DIVIDE("/", (a, b) -> (a / b)),
+        MOD("%", (a, b) -> (a / b));
+
+        private final String op;
+        private final BiFunction<Double, Double, Double> biFunction;
+
+        Operator(String op, BiFunction<Double, Double, Double> biFunction) {
+            this.op = op;
+            this.biFunction = biFunction;
+        }
+
+        public Double calculate(double a, double b) {
+            return this.biFunction.apply(a,b);
+        }
+    }
+
     /* Calculator 기본 생성자 구현 */
     public Calculator() {
         resultList = new ArrayList<>(); // 생성자에서 컬렉션 필드 초기화
@@ -23,7 +45,7 @@ public class Calculator {
     }
 
     /* 사칙연산 저장 리스트 Getter 구현 */
-    public List<Integer> getResultList() {
+    public List<Double> getResultList() {
         return resultList;
     }
 
@@ -54,8 +76,7 @@ public class Calculator {
     }
 
 
-
-    public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
+    public Double calculate(int Number1, int Number2, char operator) throws CalculatorException {
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 calculate 메서드를 사용하세요.");
     }
 
@@ -67,7 +88,7 @@ public class Calculator {
     // removeResult 메서드 구현
     public void removeResult() {
         //if (!resultList.isEmpty()) {
-           // resultList.remove(0);
+        // resultList.remove(0);
         //}
         // 첫 번째 결과 삭제 오버라이딩으로 하단에서 구현
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 removeResult 메서드를 사용하세요.");
@@ -77,7 +98,7 @@ public class Calculator {
     public void inquiryResults() {
 
         //for (int number : resultList) {
-            //System.out.print(number + " ");
+        //System.out.print(number + " ");
         //}
         //System.out.println();
 
@@ -86,47 +107,38 @@ public class Calculator {
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 inquiryResults 메서드를 사용하세요.");
     }
 
-    AddOperator addOperator = new AddOperator();
-    SubtractOperator subtractOperator = new SubtractOperator();
-    MultiplyOperator multiplyOperator = new MultiplyOperator();
-    DivideOperator divideOperator = new DivideOperator();
-    ModOperator modOperator = new ModOperator();
-
     public static class ArithmeticCalculator extends Calculator {
 
-        public ArithmeticCalculator(){
-        }
-
         @Override
-        public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
-            int answer = 0;
+        public Double calculate(int Number1, int Number2, char operator) throws CalculatorException {
+            Double answer;
             if (Number1 <= 0 && Number2 <= 0) {
                 throw new CalculatorException("두 정수가 모두 0 이상이어야 합니다.");
             } else {
                 switch (operator) {
                     case '+':
-                        answer = addOperator.operate(Number1, Number2);
+                        answer = Operator.PLUS.calculate(Number1, Number2);
                         break;
                     case '-':
-                        answer = subtractOperator.operate(Number1, Number2);
+                        answer = Operator.MINUS.calculate(Number1, Number2);
                         break;
                     case '*':
-                        answer = multiplyOperator.operate(Number1, Number2);
+                        answer = Operator.MULTIPLY.calculate(Number1, Number2);
                         break;
                     case '/':
                         if (Number2 == 0) {
                             throw new CalculatorException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                         }
-                        answer = divideOperator.operate(Number1, Number2);
+                        answer = Operator.DIVIDE.calculate(Number1, Number2);
                         break;
                     case '%':
-                        answer = modOperator.operate(Number1, Number2);
+                        answer = Operator.MOD.calculate(Number1, Number2);
                         break;
                     default:
                         throw new CalculatorException("올바르지 않은 연산자입니다.");
                 }
             }
-            //getResultList().add(answer);
+            getResultList().add(answer);
 
             return answer;
         }
@@ -143,7 +155,7 @@ public class Calculator {
         @Override
         public void inquiryResults() {
             // 배열에 저장된 연산 결과를 출력합니다.
-            for (int number : resultList) {
+            for (Double number : resultList) {
                 System.out.print(number + " ");
             }
             System.out.println();
@@ -152,7 +164,7 @@ public class Calculator {
     }
 
     public static class CircleCalculator extends Calculator {
-        public CircleCalculator(){
+        public CircleCalculator() {
 
         }
 
@@ -165,6 +177,7 @@ public class Calculator {
             //getAreaResultList().add(area);
             return area;
         }
+
         // 원의 넓이 구하기 inquiryResults 메서드 오버라이딩
         @Override
         public void inquiryResults() {

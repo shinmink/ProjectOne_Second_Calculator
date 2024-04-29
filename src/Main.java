@@ -7,13 +7,15 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Calculator calculator = new Calculator();
+
 
         Calculator.ArithmeticCalculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
         Calculator.CircleCalculator circleCalculator= new Calculator.CircleCalculator();
 
         // 1.  Scanner 를 사용하여 양의 정수
 
-        int result = 0;
+        Double result;
         String order = "";
 
         int index = 0; // 배열 인덱스를 나타내는 변수
@@ -74,7 +76,7 @@ public class Main {
                         arithmeticCalculator.removeResult(); // 첫 번째 결과 삭제
                     }
 
-                    arithmeticCalculator.getResultList().add(result);
+                    //arithmeticCalculator.getResultList().add(result);
 
                     // 8. “inquiry”라는 문자열이 입력되면 저장된 연산 결과 전부를 출력합니다.
                     // - foreach(향상된 for문)을 활용하여 구현 해봅니다.
