@@ -9,18 +9,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
+        Calculator.ArithmeticCalculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
+        Calculator.CircleCalculator circleCalculator= new Calculator.CircleCalculator();
+
         // 1.  Scanner 를 사용하여 양의 정수
-        // 2개(0 포함)를 전달 받을 수 있습니다.
-        // 양의 정수는 각각 하나씩 전달 받습니다.
-        // 양의 정수는 적합한 타입으로 선언한 변수에 저장합니다.
 
         int result = 0;
         String order = "";
 
-        // int[] intArray = new int[10]; // 초기값 {0,0,0 ... }
         int index = 0; // 배열 인덱스를 나타내는 변수
         // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
-        // - JCF(Java Collection Framework)를 사용합니다. (e.g. List, Set …)
 
 
         do {
@@ -28,6 +26,7 @@ public class Main {
                 /* 사칙연산을 진행할지 원의 너비를 구할지 선택 구현 */
                 System.out.print("원의 넓이 구하기 : 1. 사칙연산하기 : 2 ");
                 int choose = Integer.parseInt(sc.nextLine());
+
                 if (choose == 1) {
                     // 원의 넓이
                     /* 원의 넓이를 구하는 경우 반지름을 입력받아 원의 넓이를 구한 후 출력*/
@@ -37,7 +36,9 @@ public class Main {
                     System.out.println("원의 넓이: " + areaResult);
                     /* 원의 넓이 저장 */
                     calculator.getAreaResultList().add(areaResult);
-                    //System.out.println("원의 넓이: " + areaResult);
+                    /* 원의 넓이 리스트 출력 */
+                    circleCalculator.inquiryResults();
+
 
                 } else if (choose == 2) {
 
@@ -53,42 +54,24 @@ public class Main {
                     // 사칙연산 기호를 적합한 타입으로 선언한 변수에 저장합니다
                     char operator = sc.nextLine().charAt(0);
 
-//        3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
-//        - 사칙연산 기호에 맞는 연산자를 사용하여 연산을 진행합니다.
-//        - 입력받은 연산 기호를 구분하기 위해 제어문을 사용합니다. (e.g.if, switch)
-//        - 연산 오류가 발생할 경우 해당 오류에 대한 내용을 정제하여 출력합니다.
-//        - e.g. “나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다. “
+                    // 3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
+
                     result = calculator.calculate(Number1, Number2, operator);
                     //System.out.println("결과: " + result);
 
 
                     // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
-                    // 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다
-                    // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
-                    // 연산 결과가 10개를 초과하는 경우
-                    // 배열에 결과 값을 추가하고, 10개를 초과하는 경우 가장 처음에 들어온 결과 값을 제거합니다.
-//            if (index >= intArray.length) {
-//                for (int i = 0; i < intArray.length - 1; i++) {
-//                    intArray[i] = intArray[i + 1];
-//                }
-//                intArray[intArray.length - 1] = result; // 새로운 결과 값을 맨 뒤에 추가합니다.
-//            } else {
-//                intArray[index] = result; // 현재 인덱스에 결과 값을 추가합니다.
-//                index++;
-//            }
-                    //6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
-                    // - 현재 저장된 index가 마지막(9)라면 가장 먼저 저장된 결과 값이 삭제 되고 새로운 결과 값이 마지막 index에 저장될 수 있도록 구현합니다.
-                    // - Hint : 결과 값들이 한칸씩 앞으로 이동되면 되지 않을까?
-                    //7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
-                    // - JCF(Java Collection Framework)를 사용합니다. (e.g. List, Set …)
-                    // - “remove”라는 문자열을 입력받으면 가장 먼저 저장된 결과가 삭제될 수 있도록 구현합니다.
+
+                    // 6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
+
+                    // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
 
 
                     System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
                     order = sc.nextLine();
 
                     if (order.equals("remove")) {
-                        calculator.removeResult(); // 첫 번째 결과 삭제
+                        arithmeticCalculator.removeResult(); // 첫 번째 결과 삭제
                     }
 
                     calculator.getResultList().add(result);
@@ -99,7 +82,7 @@ public class Main {
                     System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
                     order = sc.nextLine();
                     if (order.equals("inquiry")) {
-                        calculator.inquiryResults();
+                        arithmeticCalculator.inquiryResults();
                     }
                 }
             } catch (NumberFormatException e) {
@@ -113,6 +96,7 @@ public class Main {
 
             // 4. 반복문을 사용하여 반복의 종료를 알려주는 “exit” 문자열을 입력하기 전까지
             // 무한으로 계산을 진행할 수 있도록 소스 코드를 수정합니다.
+
         } while (!order.equals("exit"));
 
 

@@ -3,74 +3,64 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
-
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
-    private List<Integer> resultList;
+    private static List<Integer> resultList;
 
     // 원의 넓이를 구하는 필드와 메서드 선언과 구현 ----------------------------
 
     /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
-
-    /* 원주율은 pi 이기에 상수로 생성*/
     private static double AreaTotal = 0;
-    private List<Double> AreaResultList;
-
+    private static List<Double> AreaResultList;
+    /* 원주율은 pi 이기에 상수로 생성*/
     private static final double PI = 3.141592;
 
-
+    /* Calculator 기본 생성자 구현 */
     public Calculator() {
         resultList = new ArrayList<>(); // 생성자에서 컬렉션 필드 초기화
         AreaResultList = new ArrayList<>();
-    }// 기본 생성자
+    }
 
-
+    /* 사칙연산 저장 리스트 Getter 구현 */
     public List<Integer> getResultList() {
         return resultList;
     }
 
-
+    /* 사칙연산 결과 Getter 구현 */
     public int getTotal() {
         return total;
     }
 
+    /* 사칙연산 결과 Setter 구현 */
     public void setTotal(int total) {
         this.total = total;
     }
 
+    /* 원의 넓이 저장 필드 Getter, Setter, 조회 메서드 구현 */
+    /* 원의 넓이 결과 저장 리스트 Getter 구현 */
     public List<Double> getAreaResultList() {
         return AreaResultList;
     }
 
-    /* 원의 넓이 저장 필드 Getter, Setter, 조회 메서드 구현 */
+    /* 원의 넓이 결과 Getter 구현 */
     public double getAreaTotal() {
         return AreaTotal;
     }
 
+    /* 원의 넓이 결과 Setter 구현 */
     public void setAreaTotal(double AreaTotal) {
         this.AreaTotal = AreaTotal;
     }
 
 
-
-
     public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
 
         //1. 양의 정수 2개(0 포함)와 연산 기호를 매개변수로 받아
-        // 사칙연산(+,-,*,/) 기능을 수행한 후 결과 값을 반환하는 메서드와 연산 결과를
-        // 저장하는 컬렉션 타입 필드를 가진 Calculator 클래스를 생성합니다.
-        // - 나눗셈에서 분모에 0이 들어오거나 연산자 기호가 잘 못 들어온 경우
-        // 적합한 Exception 클래스를 생성하여 throw 합니다.
-        // (매개변수로 해당 오류 내용을 전달합니다.)
-
         int answer = 0;
-//        3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
-//        - 사칙연산 기호에 맞는 연산자를 사용하여 연산을 진행합니다.
-//        - 입력받은 연산 기호를 구분하기 위해 제어문을 사용합니다. (e.g.if, switch)
-//        - 연산 오류가 발생할 경우 해당 오류에 대한 내용을 정제하여 출력합니다.
-//        - e.g. “나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다. “
+
+        //3. 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
 
         /* 제어문을 활용하여 위 요구사항을 만족할 수 있게 구현합니다.*/
         if (Number1 <= 0 && Number2 <= 0) {
@@ -105,48 +95,13 @@ public class Calculator {
         System.out.println("결과: " + getTotal());
 
         // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
-        // 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다
-        // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
-        // 연산 결과가 10개를 초과하는 경우
-        // 배열에 결과 값을 추가하고, 10개를 초과하는 경우 가장 처음에 들어온 결과 값을 제거합니다.
-//            if (index >= intArray.length) {
-//                for (int i = 0; i < intArray.length - 1; i++) {
-//                    intArray[i] = intArray[i + 1];
-//                }
-//                intArray[intArray.length - 1] = result; // 새로운 결과 값을 맨 뒤에 추가합니다.
-//            } else {
-//                intArray[index] = result; // 현재 인덱스에 결과 값을 추가합니다.
-//                index++;
-//            }
+
         //6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
-        // - 현재 저장된 index가 마지막(9)라면 가장 먼저 저장된 결과 값이 삭제 되고 새로운 결과 값이 마지막 index에 저장될 수 있도록 구현합니다.
-        // - Hint : 결과 값들이 한칸씩 앞으로 이동되면 되지 않을까?
+
         //7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
-        // - JCF(Java Collection Framework)를 사용합니다. (e.g. List, Set …)
-        // - “remove”라는 문자열을 입력받으면 가장 먼저 저장된 결과가 삭제될 수 있도록 구현합니다.
-
-
-        // 결과를 리스트에 추가
-        //resultList.add(total);
 
         return total;
 
-
-    }
-
-    // removeResult 메서드 구현
-    public void removeResult() {
-        if (!resultList.isEmpty()) {
-            resultList.remove(0); // 첫 번째 결과 삭제
-        }
-    }
-
-    public void inquiryResults() {
-        // 배열에 저장된 연산 결과를 출력합니다.
-        for (int number : resultList) {
-            System.out.print(number + " ");
-        }
-        System.out.println();
     }
 
     /* 원의 넓이를 구하는 메서드 선언*/
@@ -156,14 +111,71 @@ public class Calculator {
         AreaTotal = answer;
         //AreaResultList.add(AreaTotal);
 
-        for (double number : AreaResultList) {
-            System.out.print(number + " ");
-        }
-
-        System.out.println();
         return answer;
     }
 
+    // removeResult 메서드 구현
+    public void removeResult() {
+        //if (!resultList.isEmpty()) {
+           // resultList.remove(0);
+        //}
+        // 첫 번째 결과 삭제 오버라이딩으로 하단에서 구현
+    }
+
+    // inquiryResults 메서드 구현
+    public void inquiryResults() {
+
+        //for (int number : resultList) {
+            //System.out.print(number + " ");
+        //}
+        //System.out.println();
+
+        // 배열에 저장된 연산 결과를 출력합니다.
+        // 오버라이딩으로 하단에서 구현
+    }
+
+    public static class ArithmeticCalculator extends Calculator {
+
+        public ArithmeticCalculator(){
+
+        }
+        // 사칙 연산의 removeResult 메서드 오버라이딩
+        @Override
+        public void removeResult() {
+            if (!resultList.isEmpty()) {
+                resultList.remove(0); // 첫 번째 결과 삭제
+            }
+        }
+
+        // 사칙 연산의 inquiryResults 메서드 오버라이딩
+        @Override
+        public void inquiryResults() {
+            // 배열에 저장된 연산 결과를 출력합니다.
+            for (int number : resultList) {
+                System.out.print(number + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public static class CircleCalculator extends Calculator {
+        public CircleCalculator(){
+
+        }
+        // 원의 넓이 구하기 inquiryResults 메서드 오버라이딩
+        @Override
+        public void inquiryResults() {
+            // 배열에 저장된 연산 결과를 출력합니다.
+            for (double number : AreaResultList) {
+                System.out.print(number + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    // 예외 선언 !
     class CalculatorException extends Exception {
         public CalculatorException(String message) {
             super(message);
