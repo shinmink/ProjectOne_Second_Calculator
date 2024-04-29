@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
@@ -6,7 +8,16 @@ public class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
     private static int total = 0;
 
-    public Calculator(){}; // 기본 생성자
+    private List<Integer> resultList = new ArrayList<>();
+
+    public List<Integer> getResultList() {
+        return resultList;
+    }
+
+    public Calculator() {
+    }
+
+    ; // 기본 생성자
 
     public int getTotal() {
         return total;
@@ -24,7 +35,6 @@ public class Calculator {
     }
 
     public int calculate(int Number1, int Number2, char operator) throws CalculatorException {
-
 
         //1. 양의 정수 2개(0 포함)와 연산 기호를 매개변수로 받아
         // 사칙연산(+,-,*,/) 기능을 수행한 후 결과 값을 반환하는 메서드와 연산 결과를
@@ -94,13 +104,20 @@ public class Calculator {
         // - “remove”라는 문자열을 입력받으면 가장 먼저 저장된 결과가 삭제될 수 있도록 구현합니다.
 
 
+        // 결과를 리스트에 추가
+        //resultList.add(total);
 
-        return answer;
+        return total;
 
 
     }
 
-
+    // removeResult 메서드 구현
+    public void removeResult() {
+        if (!resultList.isEmpty()) {
+            resultList.remove(0); // 첫 번째 결과 삭제
+        }
+    }
 
 
 }
