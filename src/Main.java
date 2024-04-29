@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator();
 
 
         Calculator.ArithmeticCalculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
@@ -18,7 +15,6 @@ public class Main {
         Double result;
         String order = "";
 
-        int index = 0; // 배열 인덱스를 나타내는 변수
         // 7. 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정합니다.
 
 
@@ -60,7 +56,6 @@ public class Main {
                     result = arithmeticCalculator.calculate(Number1, Number2, operator);
                     //System.out.println("결과: " + result);
 
-
                     // 5. 연산 결과 10개를 저장할 수 있는 배열을 선언 및 생성하고 연산의 결과를 저장합니다.
 
                     // 6. 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
@@ -75,8 +70,6 @@ public class Main {
                     if (order.equals("remove")) {
                         arithmeticCalculator.removeResult(); // 첫 번째 결과 삭제
                     }
-
-                    //arithmeticCalculator.getResultList().add(result);
 
                     // 8. “inquiry”라는 문자열이 입력되면 저장된 연산 결과 전부를 출력합니다.
                     // - foreach(향상된 for문)을 활용하여 구현 해봅니다.

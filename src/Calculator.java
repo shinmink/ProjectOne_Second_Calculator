@@ -34,7 +34,7 @@ public class Calculator {
         }
 
         public Double calculate(double a, double b) {
-            return this.biFunction.apply(a,b);
+            return this.biFunction.apply(a, b);
         }
     }
 
@@ -49,30 +49,10 @@ public class Calculator {
         return resultList;
     }
 
-    /* 사칙연산 결과 Getter 구현 */
-    public int getTotal() {
-        return total;
-    }
-
-    /* 사칙연산 결과 Setter 구현 */
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
     /* 원의 넓이 저장 필드 Getter, Setter, 조회 메서드 구현 */
     /* 원의 넓이 결과 저장 리스트 Getter 구현 */
     public List<Double> getAreaResultList() {
         return AreaResultList;
-    }
-
-    /* 원의 넓이 결과 Getter 구현 */
-    public double getAreaTotal() {
-        return AreaTotal;
-    }
-
-    /* 원의 넓이 결과 Setter 구현 */
-    public void setAreaTotal(double AreaTotal) {
-        this.AreaTotal = AreaTotal;
     }
 
 
@@ -87,21 +67,12 @@ public class Calculator {
 
     // removeResult 메서드 구현
     public void removeResult() {
-        //if (!resultList.isEmpty()) {
-        // resultList.remove(0);
-        //}
         // 첫 번째 결과 삭제 오버라이딩으로 하단에서 구현
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 removeResult 메서드를 사용하세요.");
     }
 
     // inquiryResults 메서드 구현
     public void inquiryResults() {
-
-        //for (int number : resultList) {
-        //System.out.print(number + " ");
-        //}
-        //System.out.println();
-
         // 배열에 저장된 연산 결과를 출력합니다.
         // 오버라이딩으로 하단에서 구현
         throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 inquiryResults 메서드를 사용하세요.");
