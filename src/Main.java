@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,8 +8,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
 
-        Calculator.ArithmeticCalculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
-        Calculator.CircleCalculator circleCalculator= new Calculator.CircleCalculator();
+        // Calculator를 구체적으로 구현한 ArithmeticCalculator와 CircleCalculator 인스턴스 생성
+        Calculator arithmeticCalculator = new Calculator.ArithmeticCalculator();
+        Calculator circleCalculator = new Calculator.CircleCalculator();
+
 
         // 1.  Scanner 를 사용하여 양의 정수
 

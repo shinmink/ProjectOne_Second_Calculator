@@ -5,15 +5,15 @@ import java.util.function.BiFunction;
 public abstract class Calculator {
     /* 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
-    private static int total = 0;
-    private static List<Double> resultList;
+    private final int total = 0;
+    private List<Double> resultList;
 
     // 원의 넓이를 구하는 필드와 메서드 선언과 구현 ----------------------------
 
     /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드 선언 및 생성 */
     /* 원의 넓이 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
-    private static double AreaTotal = 0;
-    private static List<Double> AreaResultList;
+    private double AreaTotal = 0;
+    private List<Double> AreaResultList;
     /* 원주율은 pi 이기에 상수로 생성*/
     private static final double PI = 3.141592;
 
@@ -56,20 +56,13 @@ public abstract class Calculator {
     }
 
 
-    public Double calculate(int Number1, int Number2, char operator) throws CalculatorException {
-        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 calculate 메서드를 사용하세요.");
-    }
+    public abstract Double calculate(int Number1, int Number2, char operator) throws CalculatorException;
 
     /* 원의 넓이를 구하는 메서드 선언*/
-    public double calculateCircleArea(int r) throws CalculatorException {
-        throw new UnsupportedOperationException("CircleCalculator의 calculateCircleArea 메서드를 사용하세요.");
-    }
+    public abstract double calculateCircleArea(int r) throws CalculatorException;
 
     // removeResult 메서드 구현
-    public void removeResult() {
-        // 첫 번째 결과 삭제 오버라이딩으로 하단에서 구현
-        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 removeResult 메서드를 사용하세요.");
-    }
+    public abstract void removeResult();
 
     // 사칙 연산의 inquiryResults 메서드 오버라이딩
     public abstract void inquirybiggerResults(int num1, int num2);
@@ -77,13 +70,9 @@ public abstract class Calculator {
     // 사칙 연산의 inquiryResults 메서드 오버라이딩
 
     // inquiryResults 메서드 구현
-    public void inquiryResults() {
-        // 배열에 저장된 연산 결과를 출력합니다.
-        // 오버라이딩으로 하단에서 구현
-        throw new UnsupportedOperationException("ArithmeticCalculator 또는 CircleCalculator의 inquiryResults 메서드를 사용하세요.");
-    }
+    public abstract void inquiryResults();
 
-    public static class ArithmeticCalculator extends Calculator {
+    static class ArithmeticCalculator extends Calculator {
 
         @Override
         public Double calculate(int Number1, int Number2, char operator) throws CalculatorException {
@@ -119,11 +108,16 @@ public abstract class Calculator {
             return answer;
         }
 
+        @Override
+        public double calculateCircleArea(int r) throws CalculatorException {
+            return 0;
+        }
+
         // 사칙 연산의 removeResult 메서드 오버라이딩
         @Override
         public void removeResult() {
-            if (!resultList.isEmpty()) {
-                resultList.remove(0); // 첫 번째 결과 삭제
+            if (!getResultList().isEmpty()) {
+                getResultList().remove(0); // 첫 번째 결과 삭제
             }
         }
 
@@ -131,7 +125,7 @@ public abstract class Calculator {
         @Override
         public void inquirybiggerResults(int num1, int num2) {
             // 배열에 저장된 연산 결과를 출력합니다.
-            resultList.stream()
+            getResultList().stream()
                     .filter(number -> number > num1 && number > num2)
                     .forEach(number -> System.out.print(number + " "));
             System.out.println();
@@ -142,7 +136,7 @@ public abstract class Calculator {
         @Override
         public void inquiryResults() {
             // 배열에 저장된 연산 결과를 출력합니다.
-            for (Double number : resultList) {
+            for (Double number : getResultList()) {
                 System.out.print(number + " ");
             }
             System.out.println();
@@ -150,9 +144,14 @@ public abstract class Calculator {
 
     }
 
-    public static class CircleCalculator extends Calculator {
+    static class CircleCalculator extends Calculator {
         public CircleCalculator() {
 
+        }
+
+        @Override
+        public Double calculate(int Number1, int Number2, char operator) throws CalculatorException {
+            return 0.0;
         }
 
         @Override
@@ -160,9 +159,12 @@ public abstract class Calculator {
             if (r <= 0) {
                 throw new CalculatorException("반지름은 0보다 커야 합니다.");
             }
-            double area = r * r * PI;
-            //getAreaResultList().add(area);
-            return area;
+            return r * r * PI;
+        }
+
+        @Override
+        public void removeResult() {
+
         }
 
         @Override
@@ -173,7 +175,7 @@ public abstract class Calculator {
         @Override
         public void inquiryResults() {
             // 배열에 저장된 연산 결과를 출력합니다.
-            for (double number : AreaResultList) {
+            for (double number : getAreaResultList()) {
                 System.out.print(number + " ");
             }
             System.out.println();
